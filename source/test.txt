@@ -2,3 +2,5 @@
 new data
 Hello Mike
 Hello rebeka
+hello
+This is my first shell scripting project

@@ -21,10 +21,8 @@ mkdir -p "$BACKUP"
 
 mkdir -p "$(dirname "$LOGS")"
 # Creates logs folder automatically using dirname
-
 echo "Monitoring started on $(date)"
 >> "$LOGS"
-# writes start time into log file
 
 #Start Monitoring source Folder
 inotifywait -m -r -e modify,create,delete "$SOURCE"  |
@@ -37,17 +35,22 @@ do
 
 	DATE=$(date +%Y-%m-%d-%H-%M-%S)
 # create unique time-based folder name
-	BACKUP_FOLDER="$BACKUP/backup-$DATE"
-# create unique backup folder path
+	BACKUP_FOLDER="$BACKUP/backup-$DATE.tar.gz"
+#Compress source folder into tar.gz backup archive 
 
-	cp -r "$SOURCE" "$BACKUP_FOLDER"
-# copies all files recursively into backup folder
+       tar -czf "$BACKUP_FOLDER" "$SOURCE"
+# create unique backup folder path
+ 
+if [  $? -eq 0 ];  then
+        echo "Backeup Successful at $(date)" >> "$LOGS"
+else
+        echo "Backup failed at $(date)" >> "$LOGS"
+fi
 
 	echo "[$DATE] File $file was $action. Backup created at $BACKUP_FOLDER" >> "$LOGS"
 # Stores detailed activity in log file
 
 	echo "Backup Completed."
-# Shows Confirmation in Terminal
 
 done
 
