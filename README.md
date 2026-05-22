@@ -1,20 +1,22 @@
-#Shell Script Automation Backup Project 
+#Real-Time File Backup Automation Using Shell Scripting
 
 
 ##Project Description
-This project is an automated backup system created using shell scripting in Linux.
+This project is a real-time automated backup system created using Bash shell scripting in Linux.
 
 The script automattically:
-  - Creates backups
+  - Monitors file changes using inotifywait
+  - Creates compressed tar.gz backups
   - Stores backup files with timestamps
-  - Maintains logs
-  - Organizes backup folders
+  - Maintains backup logs
+  - Organizes backup folders automattically
 
 
 ## Technologies Used
   - Linux
   - Shell Scripting (Bash)
-  - Cron Jobs
+  - inotify-tools
+  - Tar
   - Git & Github
 
 ## Project Structure
@@ -27,11 +29,33 @@ The script automattically:
  |--README.md
 
 
-## Features 
+## Features
+ - Real-time file monitoring 
  - Automated backup creation
- - Timestamp-based backup folders
+ - tar.gz compressed backups
+ - Timestamp-based backup naming
  - Log file generation 
+ - Error handling using if-else
  - Linux automation practice project
+
+
+## How it works 
+  - The script monitors the source folder continously
+  - Detects file create/modify/delete events
+  - Creates compressed tar.gz backup automatically
+  - Stores backup inside backup folder
+  - Upadates logs with backup status
+
+## tar -czf Command Explanation
+
+tar -czf backup.tar.gz source/
+
+    - c  --> Create archive
+    - z  --> Compress using gzip
+    - f  --> Output file name
+
+This command creates compressed backups to save storage space.
+
 
 ## How to run 
 
@@ -39,4 +63,6 @@ The script automattically:
 chmod +x auto_backup.sh
 ./auto_backup.sh
 
-```test id="h4eqi4"
+## Author 
+
+BR Gajendra Babu
